@@ -1,0 +1,48 @@
+#include <condition.h>
+#include <action.h>
+#include <iostream>
+
+class Variables {
+public:
+	int t;
+	Variables() {
+		t = 0;
+	}
+};
+
+//checks if t less than 10
+class condiFunc {
+public:
+	Variables *vars;
+	condiFunc(Variables *_vars) {
+		vars = _vars;
+	}
+	bool operator()() {
+		return vars->t < 10;
+	}
+};
+
+//increments t by 1
+class actionFunc {
+public:
+	Variables *vars;
+	actionFunc(Variables *_vars) {
+		vars = _vars;
+	}
+	void operator()() {
+		vars->t++;
+	}
+};
+
+int main() {
+	Variables *vars = new Variables();
+	Condition<condiFunc> C(new condiFunc(vars));
+	Action<actionFunc> A(new actionFunc(vars));
+
+	for(int counter = 0; 
+		C.evaluate(); 
+		std::cout << counter << std::endl, 
+		A.execute(), 
+		counter++
+		);
+}
