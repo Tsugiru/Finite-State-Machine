@@ -114,6 +114,10 @@ void Transitions::remove() {
 	transition_vector.pop_back();
 }
 
+void Transitions::remove(int index) {
+	transition_vector.erase(transition_vector.begin()+index);
+}
+
 
 
 

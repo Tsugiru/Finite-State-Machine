@@ -55,6 +55,7 @@ public:
 	void set(int index, const Transition &s);
 	Transitions operator+(const Transition &t);
 	void remove();
+	void remove(int index);
 };
 
 #endif

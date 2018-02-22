@@ -1,6 +1,7 @@
 #ifndef FSM_H
 #define FSM_H
 
+#include <iostream>
 #include <transition.h>
 #include <state.h>
 #include <unordered_map>
@@ -27,7 +28,8 @@ public:
 	void setStates(States _Q);
 	void setInitialState(State _q0);
 	void setTransitions(Transitions _T);
-	
+
+	void fillAdjList();	
 	void reset();	
 	void reset(State s);	
 	void printPorts();
