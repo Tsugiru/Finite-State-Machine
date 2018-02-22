@@ -117,6 +117,20 @@ void FSM::printStates() {
 	std::cout << std::endl;
 }
 
-void FSM::drawFSM() {
-
+void FSM::drawFSM(std::string filename) {
+	std::ofstream output;
+	output.open("./graph/" + filename + ".gv");
+	if (!output) throw std::runtime_error("File did not open successfully. Could not write DOT graph file.\n");
+	output<<"digraph finite_state_machine { \n";
+	output<<"rankdir=LR;\n";
+	output<<"size=\"8,5\"\n";
+	output<<"node [shape = doublecircle]; " << q0 <<';' <<std::endl;
+	output<<"node [shape = square]; " <<curr <<';' <<std::endl;
+	output<<"node [shape = circle];\n";
+	for(size_t i = 0; i < T.size(); i++) {
+		output<<T.get(i).getStart() <<" -> " <<T.get(i).getDestination() <<";\n";	
+	}
+	output<<"}";
+	output.close();
+	std::cout<< filename + ".gv DOT graph file generated.\n";
 }

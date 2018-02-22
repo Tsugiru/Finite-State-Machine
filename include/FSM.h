@@ -2,7 +2,9 @@
 #define FSM_H
 
 #include <iostream>
+#include <fstream>
 #include <transition.h>
+#include <string>
 #include <unordered_map>
 
 class FSM {
@@ -33,7 +35,7 @@ public:
 	void reset(State s);	
 	void printPorts();
 	void printStates();
-	void drawFSM();
+	void drawFSM(std::string filename);
 };
 
 #endif

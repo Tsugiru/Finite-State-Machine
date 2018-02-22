@@ -148,12 +148,17 @@ int main() {
 
 	m.printPorts();
 	m.printStates();
-	//m.drawFSM();
+	m.drawFSM("initialstate");
+	
+	m.run(15);
+	m.drawFSM("15iterations");
 
 	m.run(60);
+	m.drawFSM("60iterations");	
 
 	m.reset(red);
 	m.run(45);
+	m.drawFSM("45iterations");
 
 	return 0;
 }
