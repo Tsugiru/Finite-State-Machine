@@ -11,41 +11,41 @@ class Transitions; //Class Prototype
 
 class Transition {
 private:
-    State start;
-    State destination;
-    Port port;
-    Condition condition;
-    Action action;
+	State start;
+	State destination;
+	Port port;
+	Condition condition;
+	Action action;
 
 public:
 	Transition(){};
 	Transition(State _start, State _destination, Port _port, Condition _condition, Action _action);
 
-    State getStart();
-    State getDestination();
-    Port getPort();
-    Condition getCondition();
-    Action getAction();
+	State getStart();
+	State getDestination();
+	Port getPort();
+	Condition getCondition();
+	Action getAction();
         
-    void setStart(State _start);
-    void setDestination(State _destination);
-    void setPort(Port _port);
-    void setCondition(Condition _condition);
-    void setAction(Action _action);
+	void setStart(State _start);
+	void setDestination(State _destination);
+	void setPort(Port _port);
+	void setCondition(Condition _condition);
+	void setAction(Action _action);
 
-    Transitions operator+(const Transition & rhs);
-    Transitions operator+(Transitions ts);
+	Transitions operator+(const Transition & rhs);
+	Transitions operator+(Transitions ts);
 
 };
 
 class Transitions {
 private:
-    std::vector<Transition> transition_vector;
+	std::vector<Transition> transition_vector;
 public:
 	Transitions(){}
-    Transitions(std::vector<Transition> _transition_vector);
+	Transitions(std::vector<Transition> _transition_vector);
 	size_t size() const;
-    std::vector<Transition> get();
+	std::vector<Transition> get();
 	Transition get(int index) const;
 	Transitions & add(const Transition &t);
 	Transitions & operator+=(const Transition &t);
