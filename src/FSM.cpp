@@ -18,8 +18,7 @@ FSM::FSM(States _Q, State _q0, Transitions _T) {
 	}
 
 	curr = q0;
-
-
+	fillAdjList();
 }
 
 void FSM::run(int max_steps) {
@@ -54,7 +53,6 @@ Transitions FSM::getTransitions() const {
 
 void FSM::setStates(States _Q) {
 	Q = _Q;
-	fillAdjList();
 }
 
 void FSM::setInitialState(State _q0) {
@@ -63,13 +61,12 @@ void FSM::setInitialState(State _q0) {
 	}
 	else{
 		q0 = Q.get(0);
-		std::cout<<"Warning: the initial state specified for the FSM does not exist in Q. q0 has been set arbitrarily." <<std::endl;
+		std::cout << "Warning: the initial state specified for the FSM does not exist in Q. q0 has been set arbitrarily." << std::endl;
 	}
 }
 
 void FSM::setTransitions(Transitions _T) {
 	T = _T;
-	fillAdjList();
 }
 
 void FSM::fillAdjList() {
@@ -87,7 +84,6 @@ void FSM::fillAdjList() {
 		}
 	}	
 }
-
 
 void FSM::reset() {
 	curr = q0;
@@ -119,18 +115,20 @@ void FSM::printStates() {
 
 void FSM::drawFSM(std::string filename) {
 	std::ofstream output;
-	output.open("./graph/" + filename + ".gv");
+	output.open("./graphs/" + filename + ".gv");
 	if (!output) throw std::runtime_error("File did not open successfully. Could not write DOT graph file.\n");
-	output<<"digraph finite_state_machine { \n";
-	output<<"rankdir=LR;\n";
-	output<<"size=\"8,5\"\n";
-	output<<"node [shape = doublecircle]; " << q0 <<';' <<std::endl;
-	output<<"node [shape = square]; " <<curr <<';' <<std::endl;
-	output<<"node [shape = circle];\n";
+
+	output << "digraph finite_state_machine {\n";
+	output << "rankdir=LR;\n";
+	output << "size=\"8,5\"\n";
+	output << "node [shape = doublecircle]; " << q0 << ';' <<std::endl;
+	output << "node [shape = square]; " << curr << ';' <<std::endl;
+	output << "node [shape = circle];\n";
 	for(size_t i = 0; i < T.size(); i++) {
-		output<<T.get(i).getStart() <<" -> " <<T.get(i).getDestination() <<";\n";	
+		output << T.get(i).getStart() << " -> " << T.get(i).getDestination() << ";\n";	
 	}
-	output<<"}";
+	output << "}";
+
 	output.close();
-	std::cout<< filename + ".gv DOT graph file generated.\n";
+	std::cout << filename + ".gv DOT graph file generated.\n";
 }

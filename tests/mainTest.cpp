@@ -17,7 +17,7 @@ public:
 	}
 };
 
-//checks if t less than 10
+//checks if t less than N
 class lessThanN : public c_functor {
 public:
 	Variables *vars;
@@ -111,7 +111,7 @@ int main() {
 	ts += tr5;
 	ts = ts + tr6;
 
-	std::cout<<ts.get(4).getStart() << std::endl <<std::endl;
+	std::cout << ts.get(4).getStart() << std::endl <<std::endl;
 
 	//Test from assignment document	
 
