@@ -37,8 +37,8 @@ public:
 	void execute_action();
 	bool valid();
 
-    Transitions operator+(const Transition & rhs);
-    Transitions operator+(Transitions ts);
+	Transitions operator+(const Transition & rhs);
+	Transitions operator+(Transitions ts);
 };
 
 class Transitions {
