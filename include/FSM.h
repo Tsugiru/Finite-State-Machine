@@ -6,14 +6,14 @@
 
 class FSM {
 private:
-    States Q;
-    Transitions T;
-    State q0;
-    State curr;
+ 	States Q;
+	Transitions T;
+	State q0;
+	State curr;
 
 public:
 	FSM(){}
-    FSM(States _Q, State _q0, Transitions _T);
+	FSM(States _Q, State _q0, Transitions _T);
 };
 
 #endif
