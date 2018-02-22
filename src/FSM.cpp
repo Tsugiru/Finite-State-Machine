@@ -104,10 +104,16 @@ void FSM::reset(State s) {
 }
 
 void FSM::printPorts() {
-	std::cout << "Ports" << std::endl;
+	std::cout << "FSM Ports" << std::endl;
 	for(size_t i = 0; i < T.size(); i++) {
 		T.get(i).getPort().print();
 	}
+	std::cout << std::endl;
+}
+
+void FSM::printStates() {
+	std::cout << "FSM States" << std::endl;
+	Q.print();
 	std::cout << std::endl;
 }
 

@@ -4,6 +4,7 @@
 #include <functor.h>
 #include <state.h>
 #include <transition.h>
+#include <FSM.h>
 
 class Variables {
 public:
@@ -11,25 +12,43 @@ public:
 	Variables() {
 		t = 0;
 	}
+	void reset() {
+		t = 0;
+	}
 };
 
 //checks if t less than 10
-class condiFunc : public c_functor {
+class lessThanN : public c_functor {
 public:
 	Variables *vars;
-	condiFunc(Variables *_vars) {
+	int N;
+	lessThanN(Variables *_vars, int _N = 10) {
 		vars = _vars;
+		N = _N;
 	}
 	virtual bool operator()() {
-		return vars->t < 10;
+		return vars->t < N;
+	}
+};
+
+class equalsN : public c_functor {
+public:
+	Variables *vars;
+	int N;
+	equalsN(Variables *_vars, int _N = 10) {
+		vars = _vars;
+		N = _N;
+	}
+	virtual bool operator()() {
+		return vars->t == N;	
 	}
 };
 
 //increments t by 1
-class actionFunc : public a_functor {
+class incrementByOne : public a_functor {
 public:
 	Variables *vars;
-	actionFunc(Variables *_vars) {
+	incrementByOne(Variables *_vars) {
 		vars = _vars;
 	}
 	virtual void operator()() {
@@ -37,10 +56,21 @@ public:
 	}
 };
 
+class resetNum : public a_functor {
+public:
+	Variables *vars;
+	resetNum(Variables *_vars) {
+		vars = _vars;
+	}
+	virtual void operator()() {
+		vars->t = 0;	
+	}
+};
+
 int main() {
 	Variables *vars = new Variables();
-	Condition C(new condiFunc(vars));
-	Action A(new actionFunc(vars));
+	Condition C(new lessThanN(vars,10));
+	Action A(new incrementByOne(vars));
 
 	for(int counter = 0; 
 		C.evaluate(); 
@@ -68,20 +98,62 @@ int main() {
 	//or just like this
 	ss.print();
 
+	Port test("Test Port", true);
+
+	Transition tr1(s1, s1, test, C, A);
+	Transition tr2(s1, s2, test, C, A);
+	Transition tr3(s2, s3, test, C, A);
+	Transition tr4(s3, s4, test, C, A);
+	Transition tr5(s4, s3, test, C, A);
+	Transition tr6(s4, s4, test, C, A);
+
+	Transitions ts = tr1 + tr2 + tr3 + tr4;
+	ts += tr5;
+	ts = ts + tr6;
+
+	std::cout<<ts.get(4).getStart() << std::endl <<std::endl;
+
+	//Test from assignment document	
+
+	State red("Red");
+	State green("Green");
+	State yellow("Yellow");
+
 	Port reset("Reset Port", true);
+	Port increment("Increment Port", true);
+	Port idle("Idle Port", true);
+	
+	vars->reset();
+	Condition lessThan10(new lessThanN(vars, 10));
+	Condition lessThan5(new lessThanN(vars, 5));
+	Condition equals10(new equalsN(vars, 10));
+	Condition equals5(new equalsN(vars, 5));
+	
+	Action incrementT(new incrementByOne(vars));
+	Action resetT(new resetNum(vars));
 
-	Transition t1(s1, s1, reset, C, A);
-	Transition t2(s1, s2, reset, C, A);
-	Transition t3(s2, s3, reset, C, A);
-	Transition t4(s3, s4, reset, C, A);
-	Transition t5(s4, s3, reset, C, A);
-	Transition t6(s4, s4, reset, C, A);
+	Transition t1(red, red, increment, lessThan10, incrementT);
+	Transition t2(red, green, reset, equals10, incrementT);
 
-	Transitions ts = t1 + t2 + t3 + t4;
-	ts += t5;
-	ts = ts + t6;
+	Transition t3(green, green, increment, lessThan10, incrementT);
+	Transition t4(green, yellow, reset, equals10, incrementT);
 
-	std::cout<<ts.get(4).getStart() << std::endl;
+	Transition t5(yellow, yellow, increment, lessThan5, incrementT);
+	Transition t6(yellow, red, reset, equals5, resetT);
+
+	States Q = red + green + yellow;
+	Transitions T = t1 + t2 + t3 + t4 + t5 + t6;
+
+	FSM m(Q, red, T);
+
+	m.printPorts();
+	m.printStates();
+	//m.drawFSM();
+
+	m.run(60);
+
+	m.reset(red);
+	m.run(45);
 
 	return 0;
 }
