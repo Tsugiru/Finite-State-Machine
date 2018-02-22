@@ -12,8 +12,22 @@ private:
 	State curr;
 
 public:
-	FSM(){}
+	FSM();
 	FSM(States _Q, State _q0, Transitions _T);
+	
+	States getStates() const;
+	State getInitialState() const;
+	State getCurrentState()	
+
+	void setStates(States _Q);
+	void setInitialState(State _q0);
+	void setTransitions(Transitions _T);
+	
+	void reset();	
+	void reset(State s);	
+	void printPorts();
+	void printStates();
+	void drawFSM();
 };
 
 #endif

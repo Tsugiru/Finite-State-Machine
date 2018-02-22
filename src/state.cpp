@@ -8,13 +8,22 @@ State::State(std::string _state_name) {
 	state_name = _state_name;
 }
 
-std::string State::get_name() const {
+std::string State::getName() const {
 	return state_name;
 }
 
-void State::set_name(std::string _state_name) {
+void State::setName(std::string _state_name) {
 	state_name = _state_name;	
 }
+
+bool State::isEqual(State s) {
+	return state_name == s.getName();
+}
+
+bool State::operator==(State s) {
+	return state_name == s.getName();
+}
+
 
 //The below creates and returns an object "States" containing only two states
 States State::operator+(const State & rhs) {
@@ -49,6 +58,15 @@ void States::remove() {
 State States::get(int index) const {
 	//check for index
 	return state_vector[index];
+}
+
+bool States::contains(State s) {
+	for(auto st : state_vector){
+		if(st == s){
+			return true;		
+		}	
+	}
+	return false;
 }
 
 void States::set(int index, const State &s) {
