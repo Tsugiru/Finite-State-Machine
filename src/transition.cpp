@@ -48,6 +48,18 @@ void Transition::setAction(Action _action) {
 	action = _action;
 }
 
+bool Transition::evaluate_condition() {
+	return condition.evaluate();
+}
+
+void Transition::execute_action() {
+	action.execute();
+}
+
+bool Transition::valid() {
+	return port.status() && condition.evaluate();
+}
+
 Transitions Transition::operator+(const Transition & rhs) {
 	Transitions t;
 	t.add(*this).add(rhs);

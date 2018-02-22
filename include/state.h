@@ -4,8 +4,10 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <functional>
 
 class States; //class prototype 
+
 
 class State {
 private:
@@ -19,6 +21,14 @@ public:
 	//The below creates and returns an object "States" containing only two states
 	States operator+(const State & rhs);
 	States operator+(States ss);
+	bool operator==(const State & rhs) const;
+
+	struct state_hash {
+		size_t operator()(const State & s) const {
+			return std::hash<std::string>()(s.get_name());
+		}
+	};
+
 };
 
 //overloaded insertion operator to print States

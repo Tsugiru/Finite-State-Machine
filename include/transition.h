@@ -33,6 +33,10 @@ public:
     void setCondition(Condition _condition);
     void setAction(Action _action);
 
+	bool evaluate_condition();
+	void execute_action();
+	bool valid();
+
     Transitions operator+(const Transition & rhs);
     Transitions operator+(Transitions ts);
 

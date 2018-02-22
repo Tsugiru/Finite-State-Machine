@@ -28,6 +28,10 @@ States State::operator+(States ss) {
 	return ss;
 }
 
+bool State::operator==(const State & rhs) const {
+	return this->state_name == rhs.get_name();
+}
+
 States::States(std::vector<State> &_state_vector) {
 	state_vector = _state_vector;
 }
