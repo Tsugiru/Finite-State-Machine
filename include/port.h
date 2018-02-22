@@ -2,14 +2,15 @@
 #define PORT_H
 
 class Port {
+private:
+    bool active;
 public:
-	bool active;
-	Port() { active = true; }
-	Port(bool initial_status) { active = initial_status; }
-	void activate() { active = true; }
-	void deactivate() { active = false; }
-	void toggle() { active = !active; }
-
+    Port() { active = true; }
+    Port(bool initial_status) { active = initial_status; }
+    void activate() { active = true; }
+    void deactivate() { active = false; }
+    void toggle() { active = !active; }
+	bool status() { return active; }
 };
 
 #endif

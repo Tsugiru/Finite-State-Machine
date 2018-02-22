@@ -33,9 +33,12 @@ public:
 	void setCondition(Condition _condition);
 	void setAction(Action _action);
 
-	Transitions operator+(const Transition & rhs);
-	Transitions operator+(Transitions ts);
+	bool evaluate_condition();
+	void execute_action();
+	bool valid();
 
+    Transitions operator+(const Transition & rhs);
+    Transitions operator+(Transitions ts);
 };
 
 class Transitions {

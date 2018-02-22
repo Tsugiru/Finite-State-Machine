@@ -16,15 +16,6 @@ void State::setName(std::string _state_name) {
 	state_name = _state_name;	
 }
 
-bool State::isEqual(State s) {
-	return state_name == s.getName();
-}
-
-bool State::operator==(State s) {
-	return state_name == s.getName();
-}
-
-
 //The below creates and returns an object "States" containing only two states
 States State::operator+(const State & rhs) {
 	States ss;
@@ -35,6 +26,10 @@ States State::operator+(const State & rhs) {
 States State::operator+(States ss) {
 	ss.add(*this);
 	return ss;
+}
+
+bool State::operator==(const State & rhs) const {
+	return this->state_name == rhs.get_name();
 }
 
 States::States(std::vector<State> &_state_vector) {
