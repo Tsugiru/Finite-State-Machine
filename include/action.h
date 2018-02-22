@@ -1,3 +1,6 @@
+#ifndef ACTION_H
+#define ACTION_H
+
 template <class Functor>
 class Action {
 public:
@@ -9,3 +12,5 @@ public:
 		(*f)(); 
 	}
 };
+
+#endif

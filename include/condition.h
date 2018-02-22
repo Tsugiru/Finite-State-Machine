@@ -1,3 +1,6 @@
+#ifndef CONDITION_H
+#define CONDITION_H
+
 template <class Functor>
 class Condition {
 public:
@@ -9,3 +12,5 @@ public:
 		return (*f)(); 
 	}
 };
+
+#endif

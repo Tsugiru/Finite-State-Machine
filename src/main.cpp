@@ -1,4 +1,5 @@
 #include <condition.h>
+#include <state.h>
 #include <action.h>
 #include <iostream>
 
@@ -45,4 +46,20 @@ int main() {
 		A.execute(), 
 		counter++
 		);
+
+	State s1("happy");
+	State s2("sad");
+	State s3("angry");
+	State s4("carlos");
+	States ss = s1 + s2 + s3 + s4;
+
+	//print like this
+	for(size_t i = 0;
+		i < ss.size();
+		std::cout << ss.get(i) << std::endl,
+		i++
+		);	
+
+	//or just like this
+	ss.print();
 }
