@@ -32,7 +32,6 @@ void FSM::run(int max_steps) {
 		std::vector<Transition> neighbors = adj_list[curr];	
 		bool ok = false;
 		for(auto it = neighbors.begin(); it != neighbors.end(); ++it) {
-			std::cout << "step: " << steps << std::endl;
 			if(it->valid()) {
 				ok = true;
 				it->execute_action();

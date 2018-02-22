@@ -40,7 +40,6 @@ public:
 		N = _N;
 	}
 	virtual bool operator()() {
-		std::cout << "ping " << vars->t << std::endl;
 		return vars->t == N;	
 	}
 };
