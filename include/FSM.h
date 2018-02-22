@@ -9,9 +9,9 @@
 
 class FSM {
 private:
-    States Q;
-    Transitions T;
-    State q0;
+	States Q;
+	Transitions T;
+	State q0;
 	State curr;
 	std::unordered_map<State, std::vector<Transition>, State::state_hash> adj_list;
 
