@@ -10,6 +10,8 @@ public:
 		f = _f;
 	}
 	bool evaluate() { 
+		//Call the functor through the
+		//base class pointer
 		return (*f)(); 
 	}
 };

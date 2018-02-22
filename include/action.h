@@ -10,6 +10,8 @@ public:
 		f = _f;
 	}
 	void execute() { 
+		//Call the functor through the
+		//base class pointer
 		(*f)(); 
 	}
 };
