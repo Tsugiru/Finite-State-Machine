@@ -7,6 +7,7 @@
 
 class FSM {
 private:
+<<<<<<< HEAD
     States Q;
     Transitions T;
     State q0;
@@ -17,6 +18,16 @@ public:
 	FSM(){}
     FSM(States _Q, State _q0, Transitions _T);
 	void run(int max_steps);
+=======
+ 	States Q;
+	Transitions T;
+	State q0;
+	State curr;
+
+public:
+	FSM(){}
+	FSM(States _Q, State _q0, Transitions _T);
+>>>>>>> 2ea02381f12fb9aa7f45951dd3296204837b1934
 };
 
 #endif

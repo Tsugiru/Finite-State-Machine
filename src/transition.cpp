@@ -1,11 +1,11 @@
 #include <transition.h>
 
 Transition::Transition(State _start, State _destination, Port _port, Condition _condition, Action _action) {
-    start = _start;
-    destination = _destination;
-    port = _port;
-    condition = _condition;
-    action = _action;
+	start = _start;
+	destination = _destination;
+	port = _port;
+	condition = _condition;
+	action = _action;
 }
 
 State Transition::getStart() {
