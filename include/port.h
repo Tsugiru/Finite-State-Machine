@@ -3,23 +3,28 @@
 
 #include <iostream>
 #include <string>
+#include <functional>
 
 class Port {
 private:
 	std::string name;
 	bool active;
 public:
-	Port(std::string _name = "", bool initial_status = true) { 
-		name = _name; 
-		active = initial_status; 
-	}
-	void activate() { active = true; }
-	void deactivate() { active = false; }
-	void toggle() { active = !active; }
-	bool status() { return active; }
-	void print() {
-		std::cout<<"{ " <<name <<" : " << (active ? "Active" : "Not Active") <<" }" <<std::endl;
-	}
+	Port(std::string _name = "", bool initial_status = true);
+
+	std::string getName() const;
+	void activate();
+	void deactivate();
+	void toggle();
+	bool status();
+
+	void print() const;
+
+	bool operator==(const Port & rhs) const;
+
+	struct portHash {
+		size_t operator()(const Port &p) const;
+	};
 };
 
 #endif

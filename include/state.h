@@ -22,10 +22,7 @@ public:
 	bool operator==(const State & rhs) const;
 
 	struct state_hash {
-		size_t operator()(const State & s) const {
-			return std::hash<std::string>()(s.getName());
-	
-		}
+		size_t operator()(const State & s) const;
 	};
 
 };

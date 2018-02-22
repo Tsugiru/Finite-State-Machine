@@ -7,7 +7,7 @@ CFLAGS=-I$(INCLUDEDIR) -std=c++11
 
 OBJFILES= $(patsubst ($SOURCEDIR)/%.cpp, $(SOURCEDIR)/%.o, $(wildcard $(SOURCEDIR)/*.cpp))
 DEPS= $(wildcard $(INCLUDEDIR)/*.h)
-TESTFILE= $(TESTSDIR)/smallTest.cpp
+TESTFILE= $(TESTSDIR)/mainTest.cpp
 
 $(SOURCEDIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

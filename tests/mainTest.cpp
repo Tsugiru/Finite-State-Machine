@@ -40,6 +40,7 @@ public:
 		N = _N;
 	}
 	virtual bool operator()() {
+		std::cout << "ping " << vars->t << std::endl;
 		return vars->t == N;	
 	}
 };
@@ -98,23 +99,7 @@ int main() {
 	//or just like this
 	ss.print();
 
-	Port test("Test Port", true);
-
-	Transition tr1(s1, s1, test, C, A);
-	Transition tr2(s1, s2, test, C, A);
-	Transition tr3(s2, s3, test, C, A);
-	Transition tr4(s3, s4, test, C, A);
-	Transition tr5(s4, s3, test, C, A);
-	Transition tr6(s4, s4, test, C, A);
-
-	Transitions ts = tr1 + tr2 + tr3 + tr4;
-	ts += tr5;
-	ts = ts + tr6;
-
-	std::cout << ts.get(4).getStart() << std::endl <<std::endl;
-
 	//Test from assignment document	
-
 	State red("Red");
 	State green("Green");
 	State yellow("Yellow");
@@ -148,17 +133,21 @@ int main() {
 
 	m.printPorts();
 	m.printStates();
-	m.drawFSM("initialstate");
+	m.drawFSM("assignmentFSM_before_run");
+	m.run(12);
+	m.drawFSM("assignmentFSM_after_run");
 	
-	m.run(15);
-	m.drawFSM("15iterations");
+//	m.drawFSM("initialstate");
+	
+//	m.run(15);
+//	m.drawFSM("15iterations");
 
-	m.run(60);
-	m.drawFSM("60iterations");	
+//	m.run(60);
+//	m.drawFSM("60iterations");	
 
-	m.reset(red);
-	m.run(45);
-	m.drawFSM("45iterations");
+//	m.reset(red);
+//	m.run(45);
+//	m.drawFSM("45iterations");
 
 	return 0;
 }

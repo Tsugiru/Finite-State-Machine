@@ -32,6 +32,10 @@ bool State::operator==(const State & rhs) const {
 	return this->state_name == rhs.getName();
 }
 
+size_t State::state_hash::operator()(const State &s) const {
+	return std::hash<std::string>()(s.getName());
+}
+
 States::States(std::vector<State> &_state_vector) {
 	state_vector = _state_vector;
 }
