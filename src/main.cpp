@@ -68,7 +68,7 @@ int main() {
 	//or just like this
 	ss.print();
 
-	Port reset;
+	Port reset("Reset Port", true);
 
 	Transition t1(s1, s1, reset, C, A);
 	Transition t2(s1, s2, reset, C, A);

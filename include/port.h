@@ -9,11 +9,7 @@ private:
 	string name;
 	bool active;
 public:
-	Port() { 
-		name = ""; 
-		active = true; 
-	}
-	Port(string _name = "", bool initial_status) { 
+	Port(string _name = "", bool initial_status = true) { 
 		name = _name; 
 		active = initial_status; 
 	}
