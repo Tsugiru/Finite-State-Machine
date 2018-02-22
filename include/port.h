@@ -6,7 +6,7 @@
 
 class Port {
 private:
-	string name;
+	std::string name;
 	bool active;
 public:
 	Port(string _name = "", bool initial_status = true) { 

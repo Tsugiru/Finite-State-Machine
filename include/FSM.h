@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <transition.h>
-#include <state.h>
 #include <unordered_map>
 
 class FSM {

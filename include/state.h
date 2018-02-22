@@ -24,6 +24,8 @@ public:
 	struct state_hash {
 		size_t operator()(const State & s) const {
 			return std::hash<std::string>()(s.getName());
+	
+		}
 	}
 
 };
