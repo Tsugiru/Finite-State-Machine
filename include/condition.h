@@ -6,9 +6,12 @@
 class Condition {
 public:
 	c_functor *f;
-	Condition(c_functor *_f) {
+	Condition(c_functor *_f = NULL) {
 		f = _f;
 	}
+    void set(c_functor *_f) {
+        f = _f;
+    }
 	bool evaluate() { 
 		return (*f)(); 
 	}

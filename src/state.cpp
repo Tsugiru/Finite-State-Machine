@@ -22,6 +22,11 @@ States State::operator+(const State & rhs) {
 	return ss;
 }
 
+States State::operator+(States ss){
+	ss.add(*this);
+	return ss;
+}
+
 States::States(std::vector<State> &_state_vector) {
 	state_vector = _state_vector;
 }
@@ -40,16 +45,24 @@ void States::remove() {
 }
 
 State States::get(int index) const {
+	//check for index
 	return state_vector[index];
 }
 
 void States::set(int index, const State &s) {
+	//check for index	
 	state_vector[index] = s;	
 }
 
-States & States::operator+(const State & rhs) {
+States & States::operator+=(const State & rhs) {
 	this->add(rhs);
 	return (*this);
+}
+
+States States::operator+(const State & rhs) {
+	States ss = *this;
+	ss.add(rhs);
+	return ss;
 }
 
 void States::print() {

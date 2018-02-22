@@ -1,8 +1,9 @@
-#include <condition.h>
-#include <state.h>
-#include <action.h>
 #include <iostream>
+#include <condition.h>
+#include <action.h>
 #include <functor.h>
+#include <state.h>
+#include <transition.h>
 
 class Variables {
 public:
@@ -52,7 +53,10 @@ int main() {
 	State s2("sad");
 	State s3("angry");
 	State s4("carlos");
-	States ss = s1 + s2 + s3 + s4;
+    State s5("connect");
+	States ss = s1 + s2 + s3;
+    ss += s4;
+    ss = ss + s5;
 
 	//print like this
 	for(size_t i = 0;
@@ -63,4 +67,21 @@ int main() {
 
 	//or just like this
 	ss.print();
+
+    Port reset;
+
+    Transition t1(s1, s1, reset, C, A);
+    Transition t2(s1, s2, reset, C, A);
+    Transition t3(s2, s3, reset, C, A);
+    Transition t4(s3, s4, reset, C, A);
+    Transition t5(s4, s3, reset, C, A);
+    Transition t6(s4, s4, reset, C, A);
+
+    Transitions ts = t1 + t2 + t3 + t4;
+    ts += t5;
+    ts = ts + t6;
+
+    std::cout<<ts.get(4).getStart() << std::endl;
+
+    return 0;
 }

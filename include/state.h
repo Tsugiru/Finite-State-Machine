@@ -16,6 +16,7 @@ public:
 	std::string get_name() const;
 	void set_name(std::string);
 	States operator+(const State & rhs);
+	States operator+(States ss);
 	
 };
 
@@ -32,7 +33,8 @@ public:
 	void set(int index, const State &s);
 	void remove();
 	States & add(const State &s);
-	States & operator+(const State & rhs);
+	States & operator+=(const State & rhs);
+	States operator+(const State & rhs);
 	void print();
 };
 
