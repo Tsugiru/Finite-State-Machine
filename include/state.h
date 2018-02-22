@@ -15,9 +15,15 @@ public:
 	State(std::string _state_name);
 	std::string get_name() const;
 	void set_name(std::string);
+<<<<<<< HEAD
 
 	//The below creates and returns an object "States" containing only two states
 	States operator+(const State & rhs); 
+=======
+	States operator+(const State & rhs);
+	States operator+(States ss);
+	
+>>>>>>> ca3797b0c83468809636afbf78f38f73d9444f47
 };
 
 //overloaded insertion operator to print States
@@ -36,11 +42,16 @@ public:
 
 	//The below is similar to the overloaded + operator
 	States & add(const State &s);
+<<<<<<< HEAD
 
 	//The below adds the state on the right hand side to the
 	//States object on the left hand side
 	States & operator+(const State & rhs);
 
+=======
+	States & operator+=(const State & rhs);
+	States operator+(const State & rhs);
+>>>>>>> ca3797b0c83468809636afbf78f38f73d9444f47
 	void print();
 };
 

@@ -25,9 +25,17 @@ States State::operator+(const State & rhs) {
 }
 ////// Implementation of State methods ends //////
 
+<<<<<<< HEAD
 
 
 ////// Implementation of States methods begins //////
+=======
+States State::operator+(States ss){
+	ss.add(*this);
+	return ss;
+}
+
+>>>>>>> ca3797b0c83468809636afbf78f38f73d9444f47
 States::States(std::vector<State> &_state_vector) {
 	state_vector = _state_vector;
 }
@@ -47,18 +55,30 @@ void States::remove() {
 }
 
 State States::get(int index) const {
+	//check for index
 	return state_vector[index];
 }
 
 void States::set(int index, const State &s) {
+	//check for index	
 	state_vector[index] = s;	
 }
 
+<<<<<<< HEAD
 //The below adds the state on the right hand side to the
 //States object on the left hand side
 States & States::operator+(const State & rhs) {
+=======
+States & States::operator+=(const State & rhs) {
+>>>>>>> ca3797b0c83468809636afbf78f38f73d9444f47
 	this->add(rhs);
 	return (*this);
+}
+
+States States::operator+(const State & rhs) {
+	States ss = *this;
+	ss.add(rhs);
+	return ss;
 }
 
 void States::print() {
