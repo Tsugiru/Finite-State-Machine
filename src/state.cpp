@@ -29,7 +29,7 @@ States State::operator+(States ss) {
 }
 
 bool State::operator==(const State & rhs) const {
-	return this->state_name == rhs.get_name();
+	return this->state_name == rhs.getName();
 }
 
 States::States(std::vector<State> &_state_vector) {
@@ -90,6 +90,6 @@ void States::print() {
 
 //overloaded insertion operator to print States
 std::ostream & operator<<(std::ostream & os, const State & rhs) {
-	os << rhs.get_name();
+	os << rhs.getName();
 	return os;	
 }

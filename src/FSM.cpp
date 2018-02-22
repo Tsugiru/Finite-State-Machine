@@ -48,7 +48,7 @@ State FSM::getCurrentState() const {
 	return curr;
 }
 
-State FSM::getTransitions() const {
+Transitions FSM::getTransitions() const {
 	return T;
 }
 
@@ -63,7 +63,7 @@ void FSM::setInitialState(State _q0) {
 	}
 	else{
 		q0 = Q.get(0);
-		cout<<"Warning: the initial state specified for the FSM does not exist in Q. q0 has been set arbitrarily." <<std::endl;
+		std::cout<<"Warning: the initial state specified for the FSM does not exist in Q. q0 has been set arbitrarily." <<std::endl;
 	}
 }
 

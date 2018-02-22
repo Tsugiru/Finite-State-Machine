@@ -26,7 +26,7 @@ public:
 			return std::hash<std::string>()(s.getName());
 	
 		}
-	}
+	};
 
 };
 

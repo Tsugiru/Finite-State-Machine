@@ -22,7 +22,7 @@ public:
 	States getStates() const;
 	State getInitialState() const;
 	State getCurrentState()	const;
-	State getTransitions() const;
+	Transitions getTransitions() const;
 
 	void setStates(States _Q);
 	void setInitialState(State _q0);

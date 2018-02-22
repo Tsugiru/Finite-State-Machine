@@ -9,7 +9,7 @@ private:
 	std::string name;
 	bool active;
 public:
-	Port(string _name = "", bool initial_status = true) { 
+	Port(std::string _name = "", bool initial_status = true) { 
 		name = _name; 
 		active = initial_status; 
 	}
