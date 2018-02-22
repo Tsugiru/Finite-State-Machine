@@ -1,11 +1,12 @@
 #ifndef CONDITION_H
 #define CONDITION_H
 
-template <class Functor>
+#include <functor.h>
+
 class Condition {
 public:
-	Functor *f;
-	Condition(Functor *_f) {
+	c_functor *f;
+	Condition(c_functor *_f) {
 		f = _f;
 	}
 	bool evaluate() { 

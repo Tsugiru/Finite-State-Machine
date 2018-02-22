@@ -1,11 +1,12 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-template <class Functor>
+#include <functor.h>
+
 class Action {
 public:
-	Functor *f;
-	Action(Functor *_f) {
+	a_functor *f;
+	Action(a_functor *_f) {
 		f = _f;
 	}
 	void execute() { 

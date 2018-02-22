@@ -2,6 +2,7 @@
 #include <state.h>
 #include <action.h>
 #include <iostream>
+#include <functor.h>
 
 class Variables {
 public:
@@ -12,33 +13,33 @@ public:
 };
 
 //checks if t less than 10
-class condiFunc {
+class condiFunc : public c_functor {
 public:
 	Variables *vars;
 	condiFunc(Variables *_vars) {
 		vars = _vars;
 	}
-	bool operator()() {
+	virtual bool operator()() {
 		return vars->t < 10;
 	}
 };
 
 //increments t by 1
-class actionFunc {
+class actionFunc : public a_functor {
 public:
 	Variables *vars;
 	actionFunc(Variables *_vars) {
 		vars = _vars;
 	}
-	void operator()() {
+	virtual void operator()() {
 		vars->t++;
 	}
 };
 
 int main() {
 	Variables *vars = new Variables();
-	Condition<condiFunc> C(new condiFunc(vars));
-	Action<actionFunc> A(new actionFunc(vars));
+	Condition C(new condiFunc(vars));
+	Action A(new actionFunc(vars));
 
 	for(int counter = 0; 
 		C.evaluate(); 
