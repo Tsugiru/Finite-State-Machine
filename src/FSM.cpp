@@ -63,6 +63,7 @@ Transitions FSM::getTransitions() const {
 
 void FSM::setStates(States _Q) {
 	Q = _Q;
+	fillAdjList(); //called to make sure the states and transitions match
 }
 
 void FSM::setInitialState(State _q0) {
@@ -78,6 +79,7 @@ void FSM::setInitialState(State _q0) {
 
 void FSM::setTransitions(Transitions _T) {
 	T = _T;
+	fillAdjList(); //called to make sure the states and transitions match
 }
 
 void FSM::fillAdjList() {
