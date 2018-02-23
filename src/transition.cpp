@@ -81,8 +81,7 @@ std::vector<Transition> Transitions::get() {
 }
 
 Transition Transitions::get(int index) const {
-	//check index
-	return transition_vector[index];
+	return transition_vector.at(index);
 }
 
 Transitions & Transitions::add(const Transition &t) {

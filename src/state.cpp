@@ -55,8 +55,7 @@ void States::remove() {
 }
 
 State States::get(int index) const {
-	//check for index
-	return state_vector[index];
+	return state_vector.at(index);
 }
 
 bool States::contains(State s) {
