@@ -19,11 +19,12 @@ FSM::FSM(){
 ////
 FSM::FSM(States _Q, State _q0, Transitions _T) {
 	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distribution(0, _Q.size() - 1);
 
 	Q = _Q;
 	q0 = _q0;
 	T = _T;
+
+	std::uniform_int_distribution<int> distribution(0, Q.size() - 1);
 
 	if(!Q.contains(q0)){
 		std::cout << "Warning: the initial state specified for the FSM does\
@@ -91,7 +92,7 @@ void FSM::setStates(States _Q) {
 ////
 void FSM::setInitialState(State _q0) {
 	std::default_random_engine generator;
-	std::uniform_int_distribution<int> distribution(0, _Q.size() - 1);
+	std::uniform_int_distribution<int> distribution(0, Q.size() - 1);
 	if(Q.contains(_q0)){
 		q0 = _q0;	
 	}
