@@ -88,7 +88,7 @@ int main() {
 To run this project, you could write your own test and place it in the ./tests directory, then from command line you can build the project as such:
 ```
 make TEST=your_test_file_name
-./bin/you_test_file_name
+./bin/your_test_file_name
 ```
 Or you could just do
 ```
