@@ -10,7 +10,7 @@ The goal of this assignment was to build a clear API that could allow the user t
 
 3 - Actions, they act on the variables in a user defined manner.
 
-4 - Condition, boolean function of the variables, user defined.
+4 - Conditions, boolean functions of the variables, user defined.
 
 5 - Transitions, the link between two states, takes a Condition, a port, and an action. The transition will move from the first state to the second while executing the action if: The condition is true and port is active.
 
