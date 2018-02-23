@@ -1,3 +1,7 @@
+ifndef TEST
+$(error NO TEST WAS SPECIFIED)
+endif
+
 CC=g++
 INCLUDEDIR=./include
 SOURCEDIR=./src
