@@ -104,6 +104,7 @@ Transitions Transition::operator+(Transitions ts) {
 	return ts;
 }
 
+
 /////////////////////////
 /// Transitions Class ///
 /////////////////////////
