@@ -16,8 +16,11 @@ DEPS= $(wildcard $(INCLUDEDIR)/*.h)
 $(SOURCEDIR)/%.o: %.cpp $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-build: $(OBJFILES) $(TESTSDIR)/$(TEST).cpp
-	$(CC) -o $(BINDIR)/$(TEST) $^ $(CFLAGS)
+$(BINDIR)/$(TEST) : $(OBJFILES) $(TESTSDIR)/$(TEST).cpp
+	mkdir -p bin
+	$(CC) -o $@ $^ $(CFLAGS)
+
+build: $(BINDIR)/$(TEST)
 
 run: build
 	$(BINDIR)/$(TEST)
