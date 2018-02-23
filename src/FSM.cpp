@@ -2,6 +2,9 @@
 #include <random>
 #include <unordered_set>
 
+////
+/// Default constructor
+////
 FSM::FSM(){
 	Q = States();
 	q0 = State();
@@ -9,6 +12,11 @@ FSM::FSM(){
 	T = Transitions();
 }
 
+////
+/// Parametrized constructor
+/// Sets Q, q0, curr and T and fills the adjacency list
+/// If the user assigned q0 isn't present in Q, an arbitrary state present in Q is assigned to q0
+////
 FSM::FSM(States _Q, State _q0, Transitions _T) {
 	std::default_random_engine generator;
 	std::uniform_int_distribution<int> distribution(0, _Q.size() - 1);
@@ -27,6 +35,11 @@ FSM::FSM(States _Q, State _q0, Transitions _T) {
 	fillAdjList();
 }
 
+////
+/// Runs the FSM for n iterations where n <= max_steps
+/// The first transition that is valid is executed along with the action associated with it
+/// In case there are no valid transitions, the run is done and the function returns
+////
 void FSM::run(int max_steps) {
 	for(int steps = 0; steps < max_steps; steps++) {
 		std::vector<Transition> neighbors = adj_list[curr];	
@@ -45,6 +58,8 @@ void FSM::run(int max_steps) {
 	}
 }
 
+////
+///Getters
 States FSM::getStates() const {
 	return Q;
 }
@@ -60,28 +75,46 @@ State FSM::getCurrentState() const {
 Transitions FSM::getTransitions() const {
 	return T;
 }
+////
 
+////
+/// Sets Q and fills the adjacency list anew to make sure the states and transitions match
+////
 void FSM::setStates(States _Q) {
 	Q = _Q;
-	fillAdjList(); //called to make sure the states and transitions match
+	fillAdjList();
 }
 
+////
+/// Sets q0
+/// If the user assigned q0 isn't present in Q, an arbitrary state present in Q is assigned to q0
+////
 void FSM::setInitialState(State _q0) {
+	std::default_random_engine generator;
+	std::uniform_int_distribution<int> distribution(0, _Q.size() - 1);
 	if(Q.contains(_q0)){
 		q0 = _q0;	
 	}
 	else{
-		q0 = Q.get(0);
+		q0 = Q.get(distribution(generator));
 		std::cout << "Warning: the initial state specified for the FSM does\
 		   	not exist in Q. q0 has been set arbitrarily." << std::endl;
 	}
 }
 
+////
+/// Sets T and fills the adjacency list anew to make sure the states and transitions match
+////
 void FSM::setTransitions(Transitions _T) {
 	T = _T;
-	fillAdjList(); //called to make sure the states and transitions match
+	fillAdjList();
 }
 
+////
+/// Fills the adjacency list by mapping states to the transitions of which they are the starting state
+/// A transition is only considered valid if both its starting state and destination are present in Q
+/// Any invalid transition is removed from T
+////
 void FSM::fillAdjList() {
 	adj_list.clear();
 	for(size_t i = 0; i < Q.size(); i++) {
@@ -100,10 +133,17 @@ void FSM::fillAdjList() {
 	}	
 }
 
+////
+/// Resets curr to q0
+////
 void FSM::reset() {
 	curr = q0;
 } 
 
+////
+/// Resets curr to a user picked State s
+/// If s isn't present in Q, curr is set to q0
+////
 void FSM::reset(State s) {
 	if(Q.contains(s)) {
 		curr = s;
@@ -117,6 +157,10 @@ void FSM::reset(State s) {
 	}
 }
 
+////
+/// Prints the names of all the ports of the FSM along with their status
+/// Each individual port is printed once
+////
 void FSM::printPorts() {
 	std::cout << "The ports of the FSM are: " << std::endl;
 	std::unordered_set<Port, Port::portHash> ports;
@@ -131,12 +175,20 @@ void FSM::printPorts() {
 	}
 }
 
+////
+/// Prints the names of all the states in Q
+////
 void FSM::printStates() {
 	std::cout << "The states of the FSM are: " << std::endl;
 	Q.print();
 	std::cout << std::endl;
 }
 
+////
+/// Generates a DOT graph representation of the FSM.
+/// The contents of the file can be used for visualization purposes.
+/// The file is named by the user and is stored by default in the "graphs" directory
+////
 void FSM::drawFSM(std::string filename) {
 	std::ofstream output;
 	output.open("./graphs/" + filename + ".gv");
