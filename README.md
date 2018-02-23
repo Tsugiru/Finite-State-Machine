@@ -14,9 +14,10 @@ The goal of this assignment was to build a clear API that could allow the user t
 
 5 - Transitions, the link between two states, takes a Condition, a port, and an action. The transition will move from the first state to the second while executing the action if: The condition is true and port is active.
 
+
 The user can also output to a .gv file the shape of the FSM, which can then be rendered using graphviz.
 
-For instance:
+A small example:
 ```c++
 #include <iostream>
 #include <condition.h>
