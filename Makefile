@@ -8,7 +8,7 @@ SOURCEDIR=./src
 GRAPHDIR=./graphs
 TESTSDIR=./tests
 BINDIR=./bin
-CFLAGS=-I$(INCLUDEDIR) -std=c++11
+CFLAGS=-I$(INCLUDEDIR) -std=c++11 -pthread
 
 OBJFILES= $(patsubst ($SOURCEDIR)/%.cpp, $(SOURCEDIR)/%.o, $(wildcard $(SOURCEDIR)/*.cpp))
 DEPS= $(wildcard $(INCLUDEDIR)/*.h)

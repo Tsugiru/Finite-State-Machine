@@ -6,16 +6,22 @@
 #include <vector>
 #include <functional>
 
+class Interaction; //! forward declaration 
 class States; //! class prototype 
-
 
 class State {
 private:
 	std::string state_name;	//! Name of the state
+	Interaction * interaction; //! interaction this state belongs to
 public:
 	State();	//! Default Constructor
 	State(std::string _state_name);	//! Parametrize Constructor
 	std::string getName() const;	//! Returns state_name
+	void set_interaction(Interaction * interaction);
+	bool part_of_interaction();		//! Returns true if this State is part of an interaction
+
+	void interaction_ready(); 
+
 	void setName(std::string);	//! Sets state_name
 	States operator+(const State & rhs);	//! Creates and returns an object "States" 
 											//! containing only two states

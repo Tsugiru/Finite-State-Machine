@@ -36,6 +36,10 @@ FSM::FSM(States _Q, State _q0, Transitions _T) {
 	fillAdjList();
 }
 
+std::condition_variable * FSM::get_cv() {
+	return &cv;
+}
+
 ////
 /// Runs the FSM for n iterations where n <= max_steps
 /// The first transition that is valid is executed along with the action associated with it
@@ -45,6 +49,14 @@ void FSM::run(int max_steps) {
 	for(int steps = 0; steps < max_steps; steps++) {
 		std::vector<Transition> neighbors = adj_list[curr];	
 		bool ok = false;
+		if(curr.part_of_interaction()) {
+			curr.interaction_ready();					
+			set_ready_flag();
+			std::unique_lock<decltype(lock)> u_lock(lock);
+			while(ready_flag) {
+				cv.wait(u_lock);
+			}
+		}
 		for(auto it = neighbors.begin(); it != neighbors.end(); ++it) {
 			if(it->valid()) {
 				ok = true;
@@ -57,6 +69,14 @@ void FSM::run(int max_steps) {
 			return; //No transition is valid, return
 		}
 	}
+}
+
+void FSM::set_ready_flag() {
+	ready_flag = 1;
+}
+
+void FSM::clear_ready_flag() {
+	ready_flag = 0;
 }
 
 ////

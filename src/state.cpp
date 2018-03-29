@@ -1,4 +1,5 @@
 #include <state.h>
+#include <interaction.h>
 
   ///////////////////////
  ///   State Class   ///
@@ -18,6 +19,22 @@ State::State() {
 ////
 State::State(std::string _state_name) {
 	state_name = _state_name;
+	interaction = NULL;
+}
+
+void State::set_interaction(Interaction * _interaction) {
+	interaction = _interaction;
+}
+
+void State::interaction_ready() {
+	interaction->get_semaphore()->notify();
+}
+
+////
+/// Returns true if this State is part of an interaction
+////
+bool State::part_of_interaction() {
+	return interaction != NULL;
 }
 
 ////

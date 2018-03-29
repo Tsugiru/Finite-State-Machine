@@ -1,10 +1,5 @@
 #include <iostream>
-#include <condition.h>
-#include <action.h>
-#include <functor.h>
-#include <state.h>
-#include <transition.h>
-#include <FSM.h>
+#include <system.h>
 
 class Variables {
 public:
@@ -58,8 +53,18 @@ int main() {
 	Transitions ts = t1 + t2 + t3;
 	
 	FSM m(ss, s1, ts);
-	m.printStates();
-	m.run(3);
-	m.drawFSM("smallTestFSM");
-	std::cout << m.getCurrentState() << std::endl;
+	FSM m1(ss, s1, ts);
+	std::vector<FSM*> fsm_vector;					
+	fsm_vector.push_back(&m);
+	fsm_vector.push_back(&m1);
+
+	Interaction interaction(fsm_vector);
+	m.getStates().get(1).set_interaction(&interaction);
+	m1.getStates().get(1).set_interaction(&interaction);
+
+	std::vector<Interaction*> interaction_vector;
+	interaction_vector.push_back(&interaction);
+
+	System S(fsm_vector, interaction_vector, {60, 60});
+	S.run();
 }

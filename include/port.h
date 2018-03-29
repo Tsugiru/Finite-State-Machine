@@ -11,7 +11,7 @@ private:
 	bool active;	//! Status of the port
 public:
 	Port(std::string _name = "", bool initial_status = true);	//! Default constructor
-
+		
 	std::string getName() const;	//! Returns the port's name
 	void activate();	//! Sets the boolean value to True
 	void deactivate();	//! Sets the boolean value to False
